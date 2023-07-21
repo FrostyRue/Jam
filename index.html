@@ -1,5 +1,13 @@
 <html><head>
     <title>Big Man</title>
+    <style>
+        body {
+            background: #f1f1f1;
+        }
+        .form-group {
+            margin-bottom: 1em;
+        }
+    </style>
 <script>
     
 </script>
@@ -12,6 +20,21 @@
 <img src="TheBigMan.png" alt=TheBigMan>
 <--the man himself
 <p> Don't quite know where to go from here. I do have a background color chosen. It was somethin like Burly Wood. Banger name imo. <br> I just realized it's roughly the same color as Big Man up top. That will definately be interesting. Luckily he has a built in border, he won't just fade into the page. </p>
+
+<form method="POST">
+    <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" name="name" id="name" />
+    </div>
+
+    <div class="form-group">
+        <label>Species</label>
+        <select name="species" id="species">
+            <option>Human</option>
+            <option>Elf</option>
+        </select>
+    </div>
+</form>
 
 </body>
 </html>

@@ -1,12 +1,13 @@
 <html>
     <head>
-        <style> body {background-color: burlywood;} 
-        
+        <style> body {background-color: burlywood;
+        box-sizing: 11;
+        }
         </style>
 
     </head>
     <body>
-        <p style="color:darkgrey">Gettin some text in here</p>
+        <p style="color:rgb(60, 60, 60)">Gettin some text in here</p>
         
     </body>
     <script>

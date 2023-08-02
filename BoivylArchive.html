@@ -5,8 +5,11 @@
         }
         .cubed-in {margin-top: 13px }
         .elements {width: 50em; padding: 1px;}
+        .person-name {
+            font-size: 1.5em;
+            font-weight: bold;
+        }
         </style>
-
     </head>
     <body>
         <h1> Waugh, typing</h1>
@@ -14,7 +17,7 @@
         <form method="post">
             <div class="cubed-in"> 
                 <label for="flname">Full Name</label>
-                <input type="text" name="name" id="name" size="40"/>
+                <input type="text" name="name" id="name" size="40" placeholder="Put your name here"/>
             </div>
             <div class="cubed-in">
                 <label>Race</label>
@@ -37,19 +40,19 @@
              </div>
             <div class="elements">
                 <h3>Element</h3>
-                <p>bawling. this requires javascript to work how i want it too. :(</p>
+                <p class="element">bawling. this requires javascript to work how i want it too. :(</p>
                 
-                <input type="checkbox" id="elem1" name="elem" value="Light">
+                <input type="checkbox" id="elem1" name="elem" value="Light" class="element">
                 <label for="elem1">Light</label>
-                <input type="checkbox" id="elem2" name="elem" value="Dark">
+                <input type="checkbox" id="elem2" name="elem" value="Dark" class="element">
                 <label for="elem2">Dark</label>
-                <input type="checkbox" id="elem3" name="elem" value="Eonianstorm">
+                <input type="checkbox" id="elem3" name="elem" value="Eonianstorm" class="element">
                 <label for="elem3">Eonianstorm</label>
-                <input type="checkbox" id="elem4" name="elem" value="eternaforet">
+                <input type="checkbox" id="elem4" name="elem" value="eternaforet" class="element">
                 <label for="elem4">Eternaforet</label>
-                <input type="checkbox" id="elem5" name="elem" value="permafrost">
+                <input type="checkbox" id="elem5" name="elem" value="permafrost" class="element">
                 <label for="elem5">Permafrost</label>
-                <input type="checkbox" id="elem6" name="elem" value="infinaflame">
+                <input type="checkbox" id="elem6" name="elem" value="infinaflame" class="element">
                 <label for="elem6">Infinaflame</label>
 
             </div>
@@ -63,10 +66,117 @@
                    
                     </div> 
                 </aside> -->
+
+            <input type="submit" value="Submit" id="send">
         </form>
 
-
+        <!-- This is our list where we'll add people. -->
+        <ul id="people"></ul>
     </body>
     <script>
+        //------------------------
+        // Limit checkbox to 3
+        //------------------------
+
+        // Get all the "elem" checkboxes
+        let checkboxes = document.querySelectorAll('input[name=elem]');
+        // Initialize a counter. We'll use this to track how many
+        // checkboxes have been checked
+        let i = 0;
+
+        // For each checbox, we'll listen for a "change" event. A "change"
+        // event gets triggered every time a checkbox is checked or unchecked
+        checkboxes.forEach(function (checkbox) {
+            checkbox.addEventListener('change', function () { // <-- anonymous function, lambda function, closure
+                // If the box is checked, add one to the counter
+                // This is the same as i = i + 1;
+                if (checkbox.checked) {
+                    i++;
+                } else {
+                // Otherwise, subtract one from the counter
+                // This is the same as i = i - 1;
+                    i--;
+                }
+
+                // If our counter has reached 3 checkboxes checked ...
+                if (i == 3) {
+                    // Loop through all the checkboxes and mark any unchecked boxes as disabled
+                    // so they can't be checked
+                    checkboxes.forEach(function (checkbox2) {
+                        if (!checkbox2.checked) {
+                            checkbox2.disabled = true;
+                        }
+                    });
+                } else {
+                    // Loop through all the checkboxes and re-enable the checkbox.
+                    // We do this to re-enable checkboxes if someone unchecks a box
+                    checkboxes.forEach(function (checkbox2) {
+                        checkbox2.disabled = false;
+                    });
+                }
+            });
+        });
+
+        //------------------------
+        // Add people to the list
+        //------------------------
+
+        // Get the submit button
+        let send = document.getElementById('send');
+
+        // When someone clicks the submit button...
+        send.addEventListener('click', function (event) {
+            // Interrupt the default behavior.
+            // That is, prevent the form from submitting.
+            event.preventDefault();
+
+            //------------
+            // Get the inputs and check if they were filled in
+            //------------
+
+            let name = document.getElementById('name');
+
+            // If name is empty ...
+            if (name.value == '') {
+                // Add a red border
+                name.style.borderColor = 'red';
+
+                // Tell the user they did something wrong!
+                alert('Please fill out the name field');
+
+                // Stop right here. We don't want to do anything until
+                // the user has filled in the required fields
+                return;
+            }
+
+            //------------
+            // We got all the info. So let's add it to the list of people
+            //------------
+
+            // Get the list where we're going to add people
+            let people = document.getElementById('people');
+
+            // Let's create a list item (li). This will be the container
+            // we add everything about a user to.
+            let li = document.createElement('li');
+
+            // Create a paragraph
+            let p = document.createElement('p');
+            // Add a class name so we can style it
+            p.classList.add('person-name');
+            // Set the content of the paragraph to the name
+            p.innerHTML = name.value;
+            // Attach the paragraph to the list item
+            li.append(p);
+
+            // Attach the list item to the list
+            people.append(li);
+
+            //------------
+            // Reset all the form fields so we can add another person
+            //------------
+
+            name.value = '';
+        });
     </script>
 </html>

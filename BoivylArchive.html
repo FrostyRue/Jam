@@ -40,7 +40,6 @@
              </div>
             <div class="elements">
                 <h3>Element</h3>
-                <p class="element">bawling. this requires javascript to work how i want it too. :(</p>
                 
                 <input type="checkbox" id="elem1" name="elem" value="Light" class="element">
                 <label for="elem1">Light</label>
@@ -75,7 +74,7 @@
     </body>
     <script>
         //------------------------
-        // Limit checkbox to 3
+        // Limit checkbox to 2
         //------------------------
 
         // Get all the "elem" checkboxes
@@ -99,7 +98,7 @@
                 }
 
                 // If our counter has reached 3 checkboxes checked ...
-                if (i == 3) {
+                if (i == 2) {
                     // Loop through all the checkboxes and mark any unchecked boxes as disabled
                     // so they can't be checked
                     checkboxes.forEach(function (checkbox2) {

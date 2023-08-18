@@ -74,6 +74,71 @@
         <ul id="people"></ul>
     </body>
     <script>
+
+        /**
+         * This is a funciton to add a person to the page.
+         * It creates a list item element (<li>) and attaches
+         * the list item to the "people" list (<ul id="people">).
+         *
+         * Resulting HTML structure of each item is:
+         *
+         * <li>
+         *     <p class="person-name">Name</p>
+         * </li>
+         */
+        function addPerson(name)
+        {
+            // Get the list where we're going to add people
+            let people = document.getElementById('people');
+
+            // Let's create a list item (li). This will be the container
+            // we add everything about a user to.
+            let li = document.createElement('li');
+
+            // Create a paragraph
+            let p = document.createElement('p');
+            // Add a class name so we can style it
+            p.classList.add('person-name');
+            // Set the content of the paragraph to the name
+            p.innerHTML = name;
+            // Attach the paragraph to the list item
+            li.append(p);
+
+            // Attach the list item to the list
+            people.append(li);
+        }
+
+        // Check local storage for an item called "characters"
+        let characters = localStorage.getItem("characters");
+
+        if (characters) {
+            // If something was found, we assume it's a JSON string
+            // so, decode it back to a list.
+            characters = JSON.parse(characters);
+        } else {
+            // If nothing was found, that means this is the first time
+            // So, let's create an empty array (list)
+            characters = [];
+        }
+
+        // Let's loop through the list and add any saved characters to the page
+        // Remember, array keys are zero-index by default. That means the first
+        // item is at 0, not 1. So, we create a counter "j" that we start at 0.
+        // Then as long as "j" is less than the number of characters (2), we +1
+        // for each loop. Since it's zero-indexed, that means character one is
+        // at j = 0, and character two is at j = 1. By the time it gets to the
+        // next iteration, j is 2, which no longer meets the condition of "j is
+        // less than the number of items in the list" so the loop ends.
+        //
+        // characters = [
+        //    0 => "Chad",
+        //    1 => "Chadette",
+        // ]
+        for (var j = 0; j < characters.length; j++)
+        {
+            addPerson(characters[j]);
+        }
+
         //------------------------
         // Limit checkbox to 3
         //------------------------
@@ -153,24 +218,21 @@
             // We got all the info. So let's add it to the list of people
             //------------
 
-            // Get the list where we're going to add people
-            let people = document.getElementById('people');
+            let person = {};
 
-            // Let's create a list item (li). This will be the container
-            // we add everything about a user to.
-            let li = document.createElement('li');
+            person.name = name.value;
+            person.race = race.value;
 
-            // Create a paragraph
-            let p = document.createElement('p');
-            // Add a class name so we can style it
-            p.classList.add('person-name');
-            // Set the content of the paragraph to the name
-            p.innerHTML = name.value;
-            // Attach the paragraph to the list item
-            li.append(p);
+            // Add the person to the HTML list
+            addPerson(name.value);
 
-            // Attach the list item to the list
-            people.append(li);
+            // Add the person to the local storage so they're be remembered
+            // the next time we open the page. We do this by adding them to
+            // the array of characters and then turn the array into a string
+            // by converting it to JSON
+            characters.push(name.value);
+
+            localStorage.setItem('characters', JSON.stringify(characters));
 
             //------------
             // Reset all the form fields so we can add another person

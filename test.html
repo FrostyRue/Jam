@@ -1,0 +1,491 @@
+<html>
+<head>
+    <title>Character Manager</title>
+    <style>
+:root {
+  color-scheme: light dark;
+  --body-bg: #fff;
+  --body-text: #444;
+  --panel-bg: rgba(0, 0, 0, 0.1);
+}
+@media (prefers-color-scheme: dark) {
+    :root {
+        --body-bg: #2d2d32;
+        --body-text: #95959f;
+        --panel-bg: rgba(255, 255, 255, 0.1);
+    }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Reset */
+html,
+body,
+div,
+span,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+abbr,
+address,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+samp,
+small,
+strong,
+sub,
+sup,
+var,
+b,
+i,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section,
+menu,
+time,
+mark,
+audio,
+video {
+  border: 0;
+  outline: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  background: transparent;
+  margin: 0;
+  padding: 0;
+}
+article,
+aside,
+figure,
+footer,
+header,
+hgroup,
+nav,
+section {
+  display: block;
+}
+nav ul {
+  list-style: none;
+}
+blockquote,
+q {
+  quotes: none;
+}
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: none;
+}
+a {
+  font-size: 100%;
+  vertical-align: baseline;
+  background: transparent;
+  margin: 0;
+  padding: 0;
+}
+del {
+  text-decoration: line-through;
+}
+abbr[title],
+dfn[title] {
+  border-bottom: 1px dotted var(--body-text);
+  cursor: help;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  font-size: inherit;
+  font: 100%;
+}
+hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid var(--hr);
+  margin: 1.5em 0;
+  padding: 0;
+}
+input,
+select {
+  vertical-align: middle;
+}
+pre,
+code,
+kbd,
+samp {
+  font-size: 87.5%;
+  font-family: Monaco, Menlo, Consolas, "Courier New", monospace;
+}
+b,
+strong,
+th {
+  font-weight: 700;
+}
+i,
+em {
+  font-style: italic;
+}
+td,
+td img {
+  vertical-align: top;
+}
+sub {
+  vertical-align: sub;
+  font-size: smaller;
+}
+sup {
+  vertical-align: super;
+  font-size: smaller;
+}
+small,
+.small {
+  font-size: 0.8em;
+  line-height: 2;
+}
+pre {
+  white-space: pre;
+  white-space: pre-wrap;
+  white-space: pre-line;
+  word-wrap: break-word;
+}
+p {
+  -webkit-hyphens: auto;
+  -webkit-hyphenate-character: "\2010";
+  -webkit-hyphenate-limit-after: 1;
+  -webkit-hyphenate-limit-before: 3;
+  -moz-hyphens: auto;
+  hyphens: auto;
+  orphans: 3;
+  widows: 3;
+  margin: 1em 0;
+}
+img,
+embed,
+object,
+video {
+  max-width: 100% !important;
+}
+article ul {
+  margin: 0 0 1.5em 0;
+  list-style: disc outside;
+}
+article ol {
+  margin: 0 0 1.5em 0;
+  list-style: decimal outside;
+}
+dd {
+  margin: 0 0 0.5em 1.5em;
+}
+dt {
+  font-weight: bold;
+}
+input[type="radio"] {
+  vertical-align: text-bottom;
+}
+input[type="checkbox"] {
+  vertical-align: middle;
+}
+label,
+input[type=button],
+input[type=submit],
+button {
+  cursor: pointer;
+  vertical-align: baseline;
+}
+button {
+  width: auto;
+  overflow: visible;
+}
+input[type=text],
+select,
+textarea {
+  display: block;
+  padding: 0.5em;
+  width: 100%;
+}
+html {
+  font-size: 85%;
+  text-align: center;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  height: 100%;
+}
+body {
+  height: 100%;
+  margin: 0;
+  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--body-text);
+  text-align: left;
+  background-color: var(--body-bg);
+}
+h1 {
+    font-size: 1.5rem;
+}
+h2 {
+    font-size: 1.3em;
+    margin: 0 0 1em 0;
+}
+h3 {
+    font-size: 1.2em;
+}
+h4 {
+    font-size: 1em;
+}
+#wrap {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+header {
+    background-color: var(--panel-bg);
+    padding: 1rem;
+}
+main {
+    flex-grow: 1;
+}
+.delete {
+  color: red;
+}
+.row {
+    display: flex;
+    flex-direction: row;
+    /*min-height: 100%;
+    max-height: 100%;*/
+}
+.row>.col {
+    width: 45%;
+    margin: 2.5%;
+    padding: 1rem;
+    background-color: var(--panel-bg);
+    border-radius: 0.5em;
+}
+#characters {
+    list-style: none;
+    margin: 1em 0;
+}
+#characters li {
+    padding: 1em 0;
+    margin: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.2);
+}
+form {
+    margin: 0;
+}
+form label {
+    display: block;
+}
+.form-group {
+    margin: 0 0 1.5em 0;
+}
+    </style>
+<script>
+function addCharacter(char)
+{
+  let lst = document.getElementById('characters');
+  let li = document.createElement('li');
+  li.id = char.id;
+
+  let name = document.createElement('h3');
+  name.innerHTML = char.name;
+  li.append(name);
+
+  let sex = document.createElement('p');
+  sex.innerHTML = char.sex;
+  li.append(sex);
+
+  let bio = document.createElement('p');
+  bio.innerHTML = char.bio;
+  li.append(bio);
+
+  let trash = document.createElement('button');
+  trash.innerHTML = '&times;';
+  trash.classList.add('delete');
+  li.append(trash);
+
+  lst.append(li);
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+
+  let characters = JSON.parse(localStorage.getItem("characters")) || [];
+  if (localStorage.getItem("characters")) {
+    characters.map(function (char) {
+      addCharacter(char);
+    });
+  }
+
+  document.querySelector('body').addEventListener('click', function (e) {
+    if (e.target.matches('.delete')) {
+      if (confirm('Are you sure?')) {
+        let id = e.target.closest('li').id;
+
+        characters = characters.filter(function (character) {
+          return character.id !== parseInt(id);
+        });
+
+        localStorage.setItem("characters", JSON.stringify(characters));
+
+        document.getElementById(id).remove();
+      }
+    }
+  });
+
+  let frm = document.getElementById('myform');
+  let invalid = false;
+
+  if (frm) {
+    frm.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      let elms = frm.querySelectorAll('input[required]');
+      elms.forEach(function (el) {
+        if (!el.value || !el.validity.valid) {
+          el.classList.add('is-invalid');
+          invalid = true;
+        } else {
+          el.classList.remove('is-invalid');
+        }
+      });
+      elms = frm.querySelectorAll('select[required]');
+      elms.forEach(function (el) {
+        if (!el.value || el.value <= 0) {
+          el.classList.add('is-invalid');
+          invalid = true;
+        } else {
+          el.classList.remove('is-invalid');
+        }
+      });
+      elms = frm.querySelectorAll('textarea[required]');
+      elms.forEach(function (el) {
+        if (!el.value || !el.validity.valid) {
+          el.classList.add('is-invalid');
+          invalid = true;
+        } else {
+          el.classList.remove('is-invalid');
+        }
+      });
+
+      if (!invalid) {
+        let post = {},
+          fields = new FormData(frm);
+
+        for (let key of fields.keys()) {
+          post[key] = fields.get(key);
+        }
+        post.id = Date.now();
+
+        characters.push(post);
+
+        localStorage.setItem("characters", JSON.stringify(characters));
+
+        addCharacter(post);
+
+        frm.reset();
+      }
+    });
+  }
+
+});
+</script>
+</head>
+<body>
+    <div id="wrap">
+    <header>
+        <h1>Character Manager</h1>
+    </header>
+    <main class="row">
+        <!-- <div class="row"> -->
+            <div class="col">
+                <h2>Characters</h2>
+                <ul id="characters">
+                    <!-- <li>
+                        <h3>Name</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean eu leo quam. Pellentesque ornare sem lacinia quam
+                        venenatis vestibulum. Nulla vitae elit libero, a pharetra augue. Nulla vitae elit libero, a pharetra augue. Donec sed
+                        odio dui. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Etiam porta sem malesuada magna
+                        mollis euismod.</p>
+                    </li> -->
+                </ul>
+            </div>
+            <div class="col">
+                <form method="post" id="myform">
+                    <h2>Add/Edit character</h2>
+
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" name="name" id="name" value="" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="sex">Sex</label>
+                        <select name="sex" id="sex">
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="asexual">Asexual</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="bio">Bio</label>
+                        <textarea rows="10" cols="35" name="bio" id="bio"></textarea>
+                    </div>
+
+                    <p><input type="submit" value="Save" /></p>
+                </form>
+            </div>
+        <!-- </div> -->
+    </main>
+    </div>
+</body>
+</html>

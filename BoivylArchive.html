@@ -86,6 +86,9 @@
          * </li>
          */
         function addPerson(name)
+        //THIS PART!!!!! NOBODY EPLAINS THIS ONE!! infinitely mad.
+        //luckily the code below technically explains it so it's not so bad
+        //also glad we have different typing styles or shit would get real confusing
         {
             // Get the list where we're going to add people
             let people = document.getElementById('people');
@@ -95,6 +98,14 @@
             let li = document.createElement('li');
 
             // Create a paragraph
+            let button = document.createElement('button');
+            button.innerHTML="remove";
+            button.addEventListener("click", function(event) {
+                event.preventDefault();
+                if(confirm("Clear List?")){
+                li.remove()};
+            });
+            li.append(button);
             let p = document.createElement('p');
             // Add a class name so we can style it
             p.classList.add('person-name');
@@ -217,10 +228,10 @@
             // We got all the info. So let's add it to the list of people
             //------------
 
-            let person = {};
+           /* let person = {};
 
             person.name = name.value;
-            person.race = race.value;
+            person.race = race.value;*/
 
             // Add the person to the HTML list
             addPerson(name.value);

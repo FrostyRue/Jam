@@ -53,6 +53,29 @@
     console.log(`My name is ${myName}. My favorite city is ${myCity}.`);
     // TEMPLATE LITERALS, they don't really apply at the moment but sweet
 
+ //this stays constant
+let kelvin = 293;
+//always -273. make it subtract
+let celcius = kelvin - 273;
+//i am not seein this equation
+let fahrenheit = celcius * (9/5) + 32;
+//round down
+fahrenheit = Math.floor(fahrenheit);
+console.log("The temperature is " + fahrenheit + " degrees Fahrenheit.");
+//extra practice
+let Newton = celcius * (33/100);
+Newton = Math.floor(Newton);
+console.log("That, and now here it is in Newtons: " + Newton);
+
+//told to convert this into dogs years. just watch
+let myAge = 20;
+let earlyYears = 2 * (10.5);
+let laterYears = myAge - 2;
+laterYears *= 4;
+console.log("My age converted to dog years is wild. " + earlyYears + " is younger and " + laterYears + " is later.");
+let myAgeInDogYears = earlyYears + laterYears;
+console.log("Nevermind, that is completely wrong. I had to them togather so it's actually " + myAgeInDogYears + ". That's my age in dog years.");
+
     /*function nextButton() {
         var checkbox = "uno";
         var checkbox = "dos";

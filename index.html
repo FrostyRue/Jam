@@ -124,6 +124,40 @@ default:
   break;
 }
 
+let userName = "Skite";
+userName === "Skite"? console.log("Hey! I know you!"): console.log("Uhh, hi?");
+let userQuestion = "Are there squrrells in space?";
+console.log(userName + " wants to ask: " + userQuestion);
+let randomNumber = Math.floor(Math.random()*8);
+let eightBall = '';
+switch (randomNumber) {
+    case 0 :
+        eightBall =('It is certain'); 
+        break;
+    case 1 :
+        eightBall =('It is decidedly so');
+        break;
+    case 2:
+        eightBall =('Reply hazy try again');
+        break;
+    case 3 :
+        eightBall =('Cannot predict now');
+        break;
+    case 4 :
+        eightBall =('Do not count on it');
+        break;
+    case 5 : 
+        eightBall =('My sources say no');
+        break;
+    case 6 : 
+        eightBall =('Outlook not so good');
+        break;
+    case 7 : 
+        eightBall =('Signs point to yes');
+        break;    
+}
+console.log("A voice echoes from above, shaking the ground to the core of Earth: EIGHTBALL SAYS '" + eightBall + "'.");
+
     /*function nextButton() {
         var checkbox = "uno";
         var checkbox = "dos";
